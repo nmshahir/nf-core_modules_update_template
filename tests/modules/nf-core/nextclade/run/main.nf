@@ -1,3 +1,5 @@
+/*
+I need to update nextclade_datasetget and then this will work again - @nmshahir
 #!/usr/bin/env nextflow
 
 nextflow.enable.dsl = 2
@@ -19,5 +21,21 @@ workflow test_nextclade_run {
     ]
 
     NEXTCLADE_RUN ( input, NEXTCLADE_DATASETGET.out.dataset )
+}
+*/
+#!/usr/bin/env nextflow
+
+nextflow.enable.dsl = 2
+
+include { NEXTCLADE_RUN } from '../../../../../modules/nf-core/nextclade/run/main.nf'
+
+workflow test_nextclade_run {
+    
+    input = [
+        [ id:'test', single_end:false ], // meta map
+        file(params.test_data['sarscov2']['illumina']['test_paired_end_bam'], checkIfExists: true)
+    ]
+
+    NEXTCLADE_RUN ( input )
 }
 
